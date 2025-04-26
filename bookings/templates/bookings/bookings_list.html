@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'booking/images/img.jpg' %}");
+            background-size: cover;
+        }
+        nav {    
+            justify-content: space-around;
+            background-color: #007bff;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+        }
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            background-color: #007bff;
+            color: white;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+        table td {
+            font-size: 14px;
+            color: #555;
+        }
+        
+        /* Responsive design for mobile devices */
+        @media only screen and (max-width: 768px) {
+            nav {
+                padding: 0.5em;
+            }
+
+            nav a {
+                margin: 0 5px;
+            }
+
+            table {
+                width: 100%;
+                margin: 10px auto;
+            }
+
+            table th, table td {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+
+            .footer {
+                margin-top: 10px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Travel Booking Portal</h1>
+        <nav>
+            <a href="/">Travel Packages</a>
+            <a href="/bookings/">View Bookings</a>
+            <a href="/admin/">Admin</a>
+        </nav>
+    </header>
+
+    <h1>All Bookings</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Package</th>
+                <th>Email</th>
+                <th>Seats</th>
+                <th>Booking Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.customer_name }}</td>
+                <td>{{ booking.package.title }}</td>
+                <td>{{ booking.customer_email }}</td>
+                <td>{{ booking.number_of_seats }}</td>
+                <td>{{ booking.booking_date|date:"Y-m-d H:i" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+ 
+</body>
+</html>

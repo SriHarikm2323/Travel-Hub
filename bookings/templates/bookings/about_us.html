@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+       
+        h1 {
+            align-items: center;
+            justify-content: center;
+            margin-left: 550px;
+        }
+        nav {
+            background-color: #007bff;
+            color: white;
+            padding: 1em;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            margin-bottom: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            justify-content: space-evenly;
+        }
+        .about-section {
+            padding: 50px;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .about-section h1 {
+            margin-left: 100px;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .about-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .about-text {
+            flex: 1;
+            padding: 20px;
+        }
+        .about-text h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        .about-text p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+        }
+        .about-text ul {
+            list-style: none;
+            padding: 0;
+        }
+        .about-text ul li {
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        .features-section {
+            display: flex;
+            justify-content: space-between;
+            background-color: #007bff;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .feature {
+            flex: 1;
+            padding: 20px;
+        }
+        .feature img {
+            max-width: 80px;
+            margin-bottom: 15px;
+        }
+        .feature h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .feature p {
+            font-size: 14px;
+            line-height: 1.6;
+        } 
+          /* Mobile view styles */
+        @media only screen and (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+
+            h1 {
+                margin-left: 0;
+                text-align: center;
+                font-size: 24px;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav a {
+                margin-bottom: 10px;
+            }
+
+            .about-section {
+                padding: 20px;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-text {
+                margin-bottom: 20px;
+            }
+
+            .about-image img {
+                width: 100%;
+                height: auto;
+            }
+
+            .features-section {
+                flex-direction: column;
+            }
+
+            .feature {
+                margin-bottom: 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <h1>About Us</h1>
+    <nav>
+        <a href="/">Travel Packages</a>
+        <a href="about_us.">About Us</a>
+        <a href="/contact_us">Contact Us</a>
+        <a href="/admin/">Admin</a>
+    </nav>
+    <div class="about-section">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>We Are Very Trusted Tour And Travel Agency, Standing Up For You All</h2>
+                <P>🔖 Affordable Prices    🏆 Prioritize Comfort</P>
+                <p>Welcome to Travel Hub , your premier online travel booking platform. We're a team of travel enthusiasts dedicated to making your trip planning experience seamless and enjoyable. we understand that trust is essential when it comes to travel planning. That's why we're dedicated to providing a secure, reliable, and transparent booking experience.</p>
+            </div>
+            <div class="about-image">
+                <img src="{% static 'booking/images/001.jpg' %}">
+            </div>
+        </div>
+    </div>
+
+    <div class="features-section">
+        <div class="feature">
+            <img src="{% static 'booking/images/0002.jpg' %}">
+            <h3>Tours Guide</h3>
+            <p>Our experienced tour guides ensure a seamless and enriching travel experience ,And our dedicated tour guides are always available to assist and enhance your journey.</p>
+        </div>
+        <div class="feature">
+            <img src="{% static 'booking/images/00001.jpg' %}">
+            <h3>Safety Safe</h3>
+            <p> We ensure your well-being with carefully vetted partners, secure payment processing, and expert guidance.Your security is our top priority, with rigorous safety protocols and 24/7 support</p>
+        </div>
+        <div class="feature">
+            <img src="{% static 'booking/images/000003.jpg' %}">
+            <h3>Clear Price</h3>
+            <p>We clearly display all costs, including taxes and fees, so you know exactly what you're paying,Our prices cover everything, so you can budget with confidence.</p>
+        </div>
+    </div>
+
+</body>
+</html>
