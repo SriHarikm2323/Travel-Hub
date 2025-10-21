@@ -22,7 +22,7 @@
             text-align: center;
             display: flex;
             align-items: center;
-            justify-content: space-around;
+            justify-content: space-between;
             margin-bottom: 10px;
         }
 
@@ -73,15 +73,12 @@
         }
 
         .container {
-            width: 80%;
-            margin: auto;
             background-color: white;
-          
+            max-width: 1200px;
+            margin: 50px auto;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            max-width: 1200px;
-            height: 600px;
             overflow: hidden;
         }
 
@@ -102,7 +99,7 @@
         }
 
         .book_now {
-            transform: translate(-50px, -85px);
+            transform: translate(-40px, -85px);
             margin-left: 270px;
             width: 100px;
             height: 30px;
@@ -130,7 +127,7 @@
         }
 
         .package {
-            width:19%;
+            width: calc(25% - 20px);
             margin: 10px;
             background-color: #f7f7f7;
             padding: 20px;
@@ -138,7 +135,6 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        
 
         .package h2 {
             color: #007bff;
@@ -155,10 +151,8 @@
         }
 
         .package-image {
-            margin-left: 20px;
-            max-width: 80%;
+            max-width: 350px;
             height: 150px;
-            display: flex;
             justify-content: center;
             margin-bottom: 10px;
         }
@@ -168,16 +162,16 @@
         }
 
         .container1 {
-            width: 80%;
-            margin: 20px auto;
             display: flex;
+            margin: 20px 40px;
             align-items: center;
             justify-content: space-between;
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
-            max-width: 1200px;
-            width: 90%;
+            max-width: 1010px;
+            margin: 50px auto;
+            padding: 20px;
             overflow: hidden;
         }
 
@@ -220,7 +214,7 @@
         }
 
         .blog-section {
-            width: 80%;
+            max-width: 1010px;
             margin: 50px auto;
             padding: 20px;
             background-color: #fff;
@@ -292,12 +286,12 @@
         }
 
         .feature-box {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            text-align: center;
+            display: grid;
+            grid-template-columns: column;
             gap: 5px;
             padding: 20px;
-            max-width: 35%;
+            max-width: 45%;
             background-color: white;
             color: rgb(13, 13, 13);
             border: 1px solid #ddd;
@@ -477,7 +471,7 @@
             }
 
             .package {
-                overflow: hidden;
+
                 width: calc(75% - 20px);
                 margin: 10px;
                 background-color: #f7f7f7;
@@ -594,10 +588,14 @@
                 <input type="text" name="query" placeholder="Search...">
                 <button type="submit">Search</button>
             </form>
-            <a href="/">Travel Packages</a>
+            <a href="/bookings/">View Bookings</a>
             <a href="/about_us/">About Us</a>
             <a href="/contact_us/">Contact Us</a>
-            <a href="/admin/">Admin</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+            <a href="{% url 'login' %}">Login</a>
+             {% endif %}
 
         </nav>
     </header>
@@ -609,36 +607,18 @@
         </form>
     </div>
 
-    <h2 style="font-family:'montserrat';font-size: 36PX;">Book your dream package today</h2>
+    <h2>Travel Packages</h2>
     <div class="packages-container">
-        <div class="package">
-            <img src="{% static 'booking/images/package2.jpg' %}" alt="Package 1" class="package-image">
-            <h2>South India Sojourn</h2>
-            <p>Destination: Mysore,Ooty,Coorg</p>
-            <p>Price: Rs.20000</p>
-            <a href="{% url 'search' %}" class="button">Book Now</a>
-        </div>
-        <div class="package">
-            <img src="{% static 'booking/images/ladakh.jpeg' %}" alt="Package 2" class="package-image">
-            <h2>Ladakh Adventure</h2>
-            <p>Destination: Leh,Nubra valley,Pangong</p>
-            <p>Price:Rs.35000</p>
-            <a href="{% url 'search' %}" class="button">Book Now</a>
-        </div>
-        <div class="package">
-            <img src="{% static 'booking/images/package4.jpeg' %}" alt="Package 3" class="package-image">
-            <h2>Andaman Island</h2>
-            <p>Destination: Port blair,Havelock Island</p>
-            <p>Price:Rs.1,999</p>
-            <a href="{% url 'search' %}" class="button">Book Now</a>
-        </div>
-        <div class="package">
-            <img src="{% static 'booking/images/kerala.jpeg' %}" alt="Package 3" class="package-image">
-            <h2>Kerala Backwaters</h2>
-            <p>Destination: Kochi, Alleppey, Kumarakom</p>
-            <p>Price:Rs.14,999</p>
-            <a href="{% url 'search' %}" class="button">Book Now</a>
-        </div>
+     {% for package in packages %}
+    <div class="package">
+        <h2>{{ package.title }}</h2>
+        <img src="{{ package.image.url }}" alt="{{ package.name }}" class="package-image">
+        <p><strong>Destination:</strong> {{ package.destination }}</p>
+        <p><strong>Price:</strong> Rs.{{ package.price }}</p>
+        <p>{{ package.description }}</p>
+        <a href="/book/{{ package.id }}/">Book Now</a>
+    </div>
+    {% endfor %}
     </div>
     <div class="container1">
         <div class="text-section">
@@ -671,7 +651,7 @@
     <!-- Why Choose Us Section -->
     <section class="choose_us">
         <div class="text-center mb-4">
-            <h2  style="font-family:'montserrat';font-size: 36PX;">Why to Choose Us</h2>
+            <h2>Why to Choose Us</h2>
         </div>
         <div style="display: flex; flex-wrap: wrap; justify-content: center;">
             <div class="feature-box">
@@ -701,15 +681,15 @@
     <section class="achievement-section">
         <div class="text-center mb-4">
         </div>
-        <h2  style="font-family:'montserrat';font-size: 36PX;" >Our <span class="text-primary" >Achievements</span></h2>
+        <h2>Our <span class="text-primary">Achievements</span></h2>
         <div class="achievements">
-            <div class="achievement-item">2 years+<p>Experience</p>
+            <div class="achievement-item">--<p>Active Members</p>
             </div>
-            <div class="achievement-item">100+<p>Happy clients</p>
+            <div class="achievement-item">--<p>Customers over Countries</p>
             </div>
-            <div class="achievement-item">300%<p>Growth Metrics</p>
+            <div class="achievement-item">--<p>Growth Metrics</p>
             </div>
-            <div class="achievement-item">10k+<p>Positive Ratings</p>
+            <div class="achievement-item">--<p>Positive Ratings</p>
             </div>
         </div>
     </section>
@@ -723,10 +703,10 @@
             <a href="/terms">Terms of Service</a>
         </div>
         <div class="footer-right">
-            <div class="footer-social">
-                <a href="#"><img src="{% static 'booking/images/facebook.svg' %}" width="30" height="30"></a>
-                <a href="#"><img src="{% static 'booking/images/whatsapp.svg' %}" width="30" height="30"></a>
-                <a href="#"><img src="{% static 'booking/images/instagram.svg' %}" width="30" height="30"></a>
+             <div class="footer-social">
+                <a href="#"><img src="{% static 'menu/image/facebook.svg' %}" width="30" height="30"></a>
+                <a href="#"><img src="{% static 'menu/image/whatsapp.svg' %}" width="30" height="30"></a>
+                <a href="#"><img src="{% static 'menu/image/instagram.svg' %}" width="30" height="30"></a>
             </div>
         </div>
     </footer>

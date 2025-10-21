@@ -11,8 +11,7 @@
             background-image: url("{% static 'booking/images/img.jpg' %}");
             background-size: cover;
         }
-        nav {    
-            justify-content: space-around;
+        nav {
             background-color: #007bff;
             color: white;
             padding: 1em;
@@ -28,6 +27,13 @@
             margin: 20px 0;
             color: #333;
         }
+         .header-logo {
+            width: 50px;
+            height: 50px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
         table {
             width: 90%;
             margin: 20px auto;
@@ -85,11 +91,14 @@
 </head>
 <body>
     <header>
-        <h1>Travel Booking Portal</h1>
+         <h1>
+            <img src="{% static 'booking/images/logo2.png' %}" class="header-logo">
+            Travel Hub
+        </h1>
         <nav>
             <a href="/">Travel Packages</a>
-            <a href="/bookings/">View Bookings</a>
-            <a href="/admin/">Admin</a>
+            <a href="/about_us/">About Us</a>
+            <a href="/contact_us/">Contact Us</a>
         </nav>
     </header>
 
@@ -98,9 +107,7 @@
     <table>
         <thead>
             <tr>
-                <th>Customer</th>
                 <th>Package</th>
-                <th>Email</th>
                 <th>Seats</th>
                 <th>Booking Date</th>
             </tr>
@@ -108,9 +115,7 @@
         <tbody>
             {% for booking in bookings %}
             <tr>
-                <td>{{ booking.customer_name }}</td>
                 <td>{{ booking.package.title }}</td>
-                <td>{{ booking.customer_email }}</td>
                 <td>{{ booking.number_of_seats }}</td>
                 <td>{{ booking.booking_date|date:"Y-m-d H:i" }}</td>
             </tr>

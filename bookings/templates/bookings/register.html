@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color:white;
+        }
+        .hero-section {
+            background: linear-gradient(to bottom, #007bff, white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px;
+        }
+        .hero-section h1 {
+            font-size: 46px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            justify-content:center;
+            padding-left: 20px;
+        }
+        .header-logo {
+            width: 80px;
+            height: 80px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        form input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .submit-btn, .home-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .home-btn {
+            background-color:#007bff;
+            margin-top: 20px;
+        }
+        a.home-btn {
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 28px;
+            }
+            form input {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <h1>
+            <img src="{% static 'booking/images/logo2.png' %}" class="header-logo">
+            Travel Hub
+        </h1>
+        
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm passworde" required>
+            <input type="submit" class="submit-btn">
+           
+        </form>
+        {% if messages %}
+        <ul>
+           {% for message in messages %}
+               <li style="color: red;">{{ message }}</li>
+          {% endfor %}
+         </ul>
+    {% endif %}
+    </div>
+</body>
+</html>
